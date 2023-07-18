@@ -13,6 +13,8 @@ class Extractor:
     x_for_first_point = 0
     x_for_last_point = 0
     x_increment = 0
+    sample_name = ''
+    comment = ''
 
 
     def __init__(self,filename):
@@ -28,6 +30,14 @@ class Extractor:
         self.x_for_first_point = data_tuple[6]
         self.x_for_last_point = data_tuple[7]
         self.x_increment = data_tuple[8]
+
+        sample_info_bytes = self.file.openstream('SampleInfo').read()[8:].split(b'\x00\x00\x00\x54\x00\x00\x00')
+
+        # try:
+        self.decode_sample_info(sample_info_bytes)
+        # except Exception:
+        #     self.sample_name = ''
+        #     self.comment = ''
 
     def read_data(self):
         if not self.file.exists('Y-Data'):
@@ -64,13 +74,30 @@ class Extractor:
 
         count = 0
         while True:
-            range = start + count * step
+            range = round(start + count * step,2)
             if step > 0 and range >= stop:
                 break
             elif step < 0 and range <= stop:
                 break
             yield range
             count += 1
+    
+    def decode_sample_info(self, sample_info_bytes: list):
+        if len(sample_info_bytes) == 2:
+            sample_name = sample_info_bytes[0].split(b'\x00\x00')[0]
+            self.sample_name = (self.unpack_sample_info(sample_name))
 
-if __name__ == '__main__':
-    main()
+            comment = sample_info_bytes[1].split(b'\x00\x00')[0]
+            self.comment = self.unpack_sample_info(comment)
+
+        elif len(sample_info_bytes) == 1:
+            sample_name = sample_info_bytes[0].split(b'\x00\x00')[0]
+            self.sample_name = self.unpack_sample_info(sample_name)
+            self.comment = ''
+
+    def unpack_sample_info(self, packed_bytes: bytes) -> str:
+        if packed_bytes[-1:] not in {b'\x00', b''}:
+            packed_bytes += b'\x00'
+        format_specifier = f'{len(packed_bytes)}s'
+        unpacked_str = unpack(format_specifier, packed_bytes)[0].decode('utf16')
+        return (unpacked_str)

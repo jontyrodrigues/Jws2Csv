@@ -1,4 +1,5 @@
 *.jws
 *.csv
 *.png
+.vscode
 __pycache__
