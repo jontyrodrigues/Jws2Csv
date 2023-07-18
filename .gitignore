@@ -1,0 +1,4 @@
+*.jws
+*.csv
+*.png
+__pycache__
