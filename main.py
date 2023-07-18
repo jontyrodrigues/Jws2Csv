@@ -7,7 +7,7 @@ def main():
     for filename in os.listdir('JWS'):
         if filename.endswith('.jws'):
             print(filename)
-            extractor = Extractor(filename)
+            extractor = Extractor("JWS/"+filename)
             extractor.read_header()
             unpacked_data = extractor.read_data()
             csv_data = list(zip(*unpacked_data))
