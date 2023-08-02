@@ -40,6 +40,7 @@ One the files have been copied then run the main.py script.
 ```
 python main.py
 ```
+Or if you don't have python installer you can use the exe file in the dist folder or download it from [here](https://github.com/jontyrodrigues/Jws2Csv/releases/). Just make sure you have the JWS and CSV folders in the same folder as the executable.
 
 The script will then convert all the JWS files in the JWS folder to CSV files and save them in the CSV folder.
 
