@@ -3,3 +3,5 @@
 *.png
 .vscode
 __pycache__
+venv
+build
