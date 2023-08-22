@@ -50,3 +50,12 @@ The script will add 5 header lines to the CSV file. The header lines contain the
 - Filename
 - X axis label and Y axis label
 - X axis units and Y axis units
+
+### New in version 0.2.1 
+- A new GUI has been build, so now you can select the JWS and CSV folders using the GUI. The old main.py script is still there if you want to use it.
+- Run the gui.py script to run the GUI.
+- Select the JWS folder and the CSV folder and click on the "Convert All FIles" button to convert the files.
+- If you want to convert a single file or a few files then select the JWS file(s) in the preview panel and click on the "Convert Selected" button.
+- Options to select the header, units, comment and filename have been added. You can select the options by checking the checkboxes.
+
+Or if you don't have python installer you can use the exe file in the dist folder or download it from [here](https://github.com/jontyrodrigues/Jws2Csv/releases/).

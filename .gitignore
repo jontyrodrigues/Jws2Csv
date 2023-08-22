@@ -5,3 +5,8 @@
 __pycache__
 venv
 build
+*.jwsv
+*.ufwd
+*.txt
+*.uvsp
+*.zip
